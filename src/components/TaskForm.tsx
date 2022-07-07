@@ -1,9 +1,10 @@
 import React, { ChangeEvent, FormEvent } from "react";
 import { Plus } from "phosphor-react";
 import { GlobalContext, TTaskContextType } from "../context/TaskListContext";
+import { useListContext } from "../hooks/useListContext";
 
 const TaskForm = () => {
-  const { taskList, setTaskList } = React.useContext(GlobalContext) as TTaskContextType;
+  const { taskList, setTaskList } = useListContext();
   const [taskTitle, setTaskTitle] = React.useState<string>("");
 
   const handleTaskTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -13,14 +14,17 @@ const TaskForm = () => {
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const currentTaskList = taskList;
-    if(currentTaskList){
-		currentTaskList.push({id: currentTaskList.length + 1, title: taskTitle, isCompleted: false});
-		setTaskList(currentTaskList);
-	}
-	else{
-		setTaskList([{id: 0, title: taskTitle, isCompleted: false}])
-	}
-	console.log(taskList)
+    if (currentTaskList) {
+      currentTaskList.push({
+        id: currentTaskList.length + 1,
+        title: taskTitle,
+        isCompleted: false,
+      });
+      setTaskList(currentTaskList);
+    } else {
+      setTaskList([{ id: 0, title: taskTitle, isCompleted: false }]);
+    }
+    console.log(taskList);
   };
 
   return (

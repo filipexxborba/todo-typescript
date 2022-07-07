@@ -1,14 +1,21 @@
 import React from "react";
 import { GlobalContext, TTaskContextType } from "../context/TaskListContext";
+import { useListContext } from "../hooks/useListContext";
 import { ITask } from "../interfaces/Task";
 
 const TaskList = () => {
-  const { taskList } = React.useContext(GlobalContext) as TTaskContextType;
+  const { taskList } = useListContext();
 
   return (
-    <ul>
-      {taskList?.map((task: ITask) => <li key={task.id}>a</li>)}
-    </ul>
+    <>
+      {taskList && (
+        <ul>
+          {taskList.map((task: ITask) => (
+            <li key={task.id}>a</li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 };
 
