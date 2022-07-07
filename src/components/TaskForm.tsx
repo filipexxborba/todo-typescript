@@ -14,13 +14,14 @@ const TaskForm = () => {
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-	// Thank you @Breno (lirbre) for the help, you're awesome!
+    // Thank you @Breno (lirbre) for the help, you're awesome!
     taskList
       ? setTaskList([
           ...taskList,
           { id: taskList.length + 1, title: taskTitle, isCompleted: false },
         ])
       : setTaskList([{ id: 0, title: taskTitle, isCompleted: false }]);
+    setTaskTitle("");
   };
 
   return (
@@ -28,9 +29,10 @@ const TaskForm = () => {
       <h2 className="text-center font-normal text-xl text-slate-800">
         What are we doing today?
       </h2>
+	  <p className="text-center text-sm text-gray-400">When you're done, click on it to mark as completed.</p>
       <form className="flex items-center my-4" onSubmit={handleFormSubmit}>
         <input
-          className="px-4 py-2 outline-none"
+          className="px-4 py-2 outline-none border-none"
           type="text"
           value={taskTitle}
           onChange={handleTaskTitleChange}
