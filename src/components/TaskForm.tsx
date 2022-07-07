@@ -13,18 +13,14 @@ const TaskForm = () => {
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const currentTaskList = taskList;
-    if (currentTaskList) {
-      currentTaskList.push({
-        id: currentTaskList.length + 1,
-        title: taskTitle,
-        isCompleted: false,
-      });
-      setTaskList(currentTaskList);
-    } else {
-      setTaskList([{ id: 0, title: taskTitle, isCompleted: false }]);
-    }
-    console.log(taskList);
+
+	// Thank you @Breno (lirbre) for the help, you're awesome!
+    taskList
+      ? setTaskList([
+          ...taskList,
+          { id: taskList.length + 1, title: taskTitle, isCompleted: false },
+        ])
+      : setTaskList([{ id: 0, title: taskTitle, isCompleted: false }]);
   };
 
   return (

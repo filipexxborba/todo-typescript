@@ -11,7 +11,9 @@ const TaskList = () => {
       {taskList && (
         <ul>
           {taskList.map((task: ITask) => (
-            <li key={task.id}>a</li>
+            <li key={task.id}>
+				<h2>{task.title}</h2>
+			</li>
           ))}
         </ul>
       )}
