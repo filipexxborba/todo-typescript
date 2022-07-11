@@ -2,18 +2,29 @@
 import { useMemo } from "react";
 import { useListContext } from "../hooks/useListContext";
 import { ITask } from "../interfaces/Task";
-import { Check } from "phosphor-react";
+import { Check, Trash } from "phosphor-react";
 
 const TaskList = () => {
   const { taskList, setTaskList } = useListContext();
-  // memoized validation if you need a new task 
+  // memoized validation if you need a new task
   const newList = useMemo(() => (taskList ? [...taskList] : null), [taskList]);
 
   // remove unused variables / props as well
   const handleTask = (index: number) => {
     // stop using direclty the state, it isn't a good aproach
-    newList![index].isCompleted ? newList![index].isCompleted = false : newList![index].isCompleted = true
-    setTaskList([...newList!]); 
+    newList![index].isCompleted
+      ? (newList![index].isCompleted = false)
+      : (newList![index].isCompleted = true);
+
+    setTaskList([...newList!]);
+  };
+
+  // delete function to cleanup complete todos
+  const deleteTask = (index: number) => {
+    // stop using direclty the state, it isn't a good aproach
+    newList?.splice(index, 1);
+
+    setTaskList([...newList!]);
   };
 
   return (
@@ -24,22 +35,39 @@ const TaskList = () => {
             .sort((a) => (a.isCompleted === true ? 1 : -1))
             .map((task: ITask, index: number) => (
               <li
-                onClick={(e) => handleTask(index)}
-                className={`group relative w-full p-3 bg-slate-200 hover:cursor-pointer ${task.isCompleted ? 'opacity-70 line-through' : ''}`}
+                // add a effect to make completed todos more visible
+                className={`flex justify-between items-center w-full p-3 bg-slate-200 ${
+                  task.isCompleted ? "opacity-70 line-through" : ""
+                }`}
                 key={task.id}
               >
-                <h2 className="text-md max-w-[90%] overflow-hidden break-words">
+                <h2
+                  className="text-md max-w-[90%] w-full overflow-hidden break-words hover:cursor-pointer"
+                  onClick={() => handleTask(index)}
+                >
                   {task.title}
                 </h2>
-                {task.isCompleted ? (
-                  <Check
-                    className="absolute right-3 top-1/2 -translate-y-1/2 block "
-                    color="green"
-                    size="18px"
-                  />
-                ) : (
-                  <></>
-                )}
+                <div className="flex gap-4">
+                  {task.isCompleted ? (
+                    <Check
+                      color="green"
+                      size="18px"
+                      className="hover:cursor-pointer"
+                      onClick={() => handleTask(index)}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                  {task.isCompleted ? (
+                    <Trash
+                      size="18px"
+                      className="z-10 hover:cursor-pointer"
+                      onClick={() => deleteTask(index)}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </div>
               </li>
             ))}
         </ul>
