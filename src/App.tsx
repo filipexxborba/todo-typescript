@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Header />
-      <div className="my-5 min-h-[50vh]">
+      <div className="app-main">
         <TaskForm />
         <TaskList />
       </div>
