@@ -7,5 +7,25 @@ body {
 }
 
 #root{
-  @apply min-h-screen flex flex-col;
+  @apply min-h-screen grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 74px 1fr 44px;
+  gap: 0;
+  /* grid areas to make the navbar / main / footer be in place */
+  grid-template-areas:
+    'navbar'
+    'main'
+    'footer';
+}
+
+.app-navbar {
+  grid-area: navbar;
+}
+
+.app-main {
+  grid-area: main;
+}
+
+.app-footer {
+  grid-area: footer;
 }
