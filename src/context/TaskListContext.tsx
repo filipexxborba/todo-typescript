@@ -1,4 +1,5 @@
-import React, { Dispatch, ReactNode } from "react";
+// remove unused imports
+import React, { ReactNode } from "react";
 import { ITask } from "../interfaces/Task";
 
 export type TTaskContextType = {

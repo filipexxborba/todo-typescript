@@ -1,6 +1,6 @@
+// remove unused imports
 import React, { ChangeEvent, FormEvent } from "react";
 import { Plus } from "phosphor-react";
-import { GlobalContext, TTaskContextType } from "../context/TaskListContext";
 import { useListContext } from "../hooks/useListContext";
 
 const TaskForm = () => {

@@ -1,4 +1,4 @@
-import React from "react";
+// remove unused imports
 
 const Footer = () => {
 	return (
