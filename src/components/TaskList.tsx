@@ -36,13 +36,15 @@ const TaskList = () => {
             .map((task: ITask, index: number) => (
               <li
                 // add a effect to make completed todos more visible
+                // change relative to flexbox
                 className={`flex justify-between items-center w-full p-3 bg-slate-200 ${
                   task.isCompleted ? "opacity-70 line-through" : ""
                 }`}
                 key={task.id}
               >
                 <h2
-                  className="text-md max-w-[90%] w-full overflow-hidden break-words hover:cursor-pointer"
+                  // remove maximum width since it will now be adaptable
+                  className="text-md w-full overflow-hidden break-words hover:cursor-pointer"
                   onClick={() => handleTask(index)}
                 >
                   {task.title}
