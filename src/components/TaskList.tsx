@@ -32,7 +32,7 @@ const TaskList = () => {
       {taskList && (
         <ul className="container max-w-sm mx-auto flex flex-col gap-5 mb-10">
           {taskList
-            .sort((a) => (a.isCompleted === true ? 1 : -1))
+            // remove sort since this could bring problems while deleting / editing
             .map((task: ITask, index: number) => (
               <li
                 // add a effect to make completed todos more visible
